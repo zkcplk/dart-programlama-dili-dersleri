@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>WebSocket Test</title>
+  <style>body{font-family:verdana;font-size:15px}#baglan{width:250px;font-weight:bold}button{height:30px}</style>
+  <script language="javascript" type="text/javascript">
+	  var wsUri = "ws://192.168.2.84/ws";
+	  var output;
+
+	  function testWebSocket() {
+		websocket = new WebSocket(wsUri);
+		websocket.onopen = function(evt) { onOpen(evt) };
+		websocket.onclose = function(evt) { onClose(evt) };
+		websocket.onmessage = function(evt) { onMessage(evt) };
+		websocket.onerror = function(evt) { onError(evt) };
+	  }
+
+	  function onOpen(evt) {
+		writeToScreen('<span style="color: green;"><b>Durum:</b> Bağlandı...</span>');
+		document.getElementById("baglan").disabled=true;
+	  }
+
+	  function onClose(evt) {
+		writeToScreen('<span style="color: red;"><b>Durum:</b> Bağlantı koptu!</span>');
+		document.getElementById("baglan").disabled=false;
+	  }
+
+	  function onMessage(evt) {
+		writeToScreen('<span style="color: blue;">Server: ' + evt.data+'</span>');
+		//websocket.close();
+	  }
+
+	  function onError(evt) {
+		writeToScreen('<span style="color: red;">HATA:</span> ' + (evt.data ? evt.data:'WebSocket Server hazır değil!'));
+	  }
+
+	  function doSend(message) {
+		writeToScreen("Siz: " + message);
+		websocket.send(message);
+	  }
+
+	  function writeToScreen(message) {
+		var pre = document.createElement("p");
+		pre.style.wordWrap = "break-word";
+		pre.innerHTML = message;
+		output.appendChild(pre);
+	  }
+
+	  function baglan() {
+		output = document.getElementById("output");
+		testWebSocket();
+	  }
+  </script>
+</head>
+<body>
+  <h2> &nbsp;&nbsp; WebSocket Test</h2>
+  <div id="panel">
+	  <p><button id="baglan" onclick="baglan();">Bağlan</button></p>
+	  <p>
+		  <button onclick="doSend('MESAJ Merhaba');">MESAJ: Merhaba</button>
+		  <button onclick="doSend('MESAJ Nasılsın?');">MESAJ: Nasılsın?</button>
+	  </p>
+  </div>
+  <div id="output" style="width:70%"></div>
+ </body>
+ </html>
