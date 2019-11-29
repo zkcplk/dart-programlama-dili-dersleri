@@ -1,7 +1,7 @@
 # Dart Programlama Dili Dersleri
 Udemy'de yer alan Dart Programlama Dili Dersleri adlı kursun ders notlarıdır. 
 
-Kursu edinmek için: https://www.udemy.com/dart-programlama-dili-dersleri/
+Kursu edinmek için: https://www.udemy.com/course/dart-programlama-dili-dersleri/?couponCode=DART_PROGRAMLAMA
 
 ## Neden Dart programlama öğrenmeliyim?
 
